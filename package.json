@@ -19,5 +19,10 @@
   "dependencies": {
     "selenium-webdriver": "^2.48.2",
     "phantomjs": "^1.9.19"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.1.0",
+    "mocha": "^2.3.4"
   }
 }
