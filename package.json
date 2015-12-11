@@ -4,7 +4,8 @@
   "description": "Allow selenium-webdriver to be used within mocha without changing command-line.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No tests yet but returning success for deploy\" && exit 0"
+    "test": "mocha",
+    "preversion": "npm test"
   },
   "keywords": [
     "mocha",
