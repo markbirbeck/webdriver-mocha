@@ -94,7 +94,7 @@ describe('my blog', function() {
   it('should navigate to post', function(done) {
     driver.get('http://markbirbeck.com/')
     .then(
-      driver.getTitle
+      driver.getTitle()
       .should.eventually.equal('Mark Birbeck\'s Blog')
     )
     .then(
