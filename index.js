@@ -1,5 +1,7 @@
 var webdriver = require('selenium-webdriver');
+var phantomjs = require('phantomjs');
 var driver = new webdriver.Builder()
+  .withCapabilities({'phantomjs.binary.path': phantomjs.path})
   .forBrowser('phantomjs')
   .build();
 
