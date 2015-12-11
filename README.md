@@ -4,7 +4,7 @@ NOTE: This module is not quite ready! Only a few commands work, and it's hard-wi
 
 ## Motivation
 
-To use WebDriver within Mocha we currently have to use a different test-runner (such as [Protractor](https://www.npmjs.com/package/protractor)) or we have to do this:
+To use WebDriver within Mocha we currently have to use a different test-runner (such as [Protractor](http://www.protractortest.org/)) or we have to do this:
 
 ```javascript
 require('chai').should();
