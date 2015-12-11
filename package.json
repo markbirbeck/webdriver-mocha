@@ -17,5 +17,7 @@
   "bugs": "https://github.com/markbirbeck/webdriver-mocha/issues",
   "homepage": "https://github.com/markbirbeck/webdriver-mocha",
   "dependencies": {
+    "selenium-webdriver": "^2.48.2",
+    "phantomjs": "^1.9.19"
   }
 }
