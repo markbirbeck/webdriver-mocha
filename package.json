@@ -1,0 +1,21 @@
+{
+  "name": "webdriver-mocha",
+  "version": "0.1.0",
+  "description": "Allow selenium-webdriver to be used within mocha without changing command-line.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet but returning success for deploy\" && exit 0"
+  },
+  "keywords": [
+    "mocha",
+    "selenium",
+    "webdriver"
+  ],
+  "author": "Mark Birbeck <mark.birbeck@gmail.com> (http://markbirbeck.com/)",
+  "license": "MIT",
+  "repository": "markbirbeck/webdriver-mocha",
+  "bugs": "https://github.com/markbirbeck/webdriver-mocha/issues",
+  "homepage": "https://github.com/markbirbeck/webdriver-mocha",
+  "dependencies": {
+  }
+}
