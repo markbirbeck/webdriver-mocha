@@ -4,6 +4,9 @@
     "node": true,
     "es6": true
   },
+  "globals": {
+    "after": true
+  },
   "rules": {
     "eqeqeq": 2,
     "no-undef": 2,
