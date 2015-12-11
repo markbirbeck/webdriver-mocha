@@ -4,7 +4,7 @@ NOTE: This module is not quite ready! Only a few commands work, and it's hard-wi
 
 ## Motivation
 
-To use WebDriver within Mocha we currently have to use a different test-runner (such as [Protractor](https://www.npmjs.com/package/protractor) or we have to do this:
+To use WebDriver within Mocha we currently have to use a different test-runner (such as [Protractor](https://www.npmjs.com/package/protractor)) or we have to do this:
 
 ```javascript
 require('chai').should();
@@ -32,7 +32,7 @@ describe('my blog', function() {
 There are two improvements that we'd like to make:
 
 * avoid having to nest every WebDriver command in a simple function;
-* be able to use `driver`, `By` and `until` without having to repeat the declarations at the top of every test.
+* be able to use `driver`, `By` and `until` without having to repeat the declarations at the top of every test file.
 
 ### Nesting Commands and Returning Promises
 
