@@ -63,7 +63,7 @@ This should work, since WebDriver claims to return promises for commands...but i
 ```javascript
     .
     .
-    .then(Promise.resolve(driver.getTitle()))
+    .then(() => Promise.resolve(driver.getTitle()))
       .then((title) => title.should.equal('Mark Birbeck\'s Blog'))
     .
     .
