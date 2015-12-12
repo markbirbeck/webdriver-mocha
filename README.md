@@ -24,6 +24,7 @@ describe('my blog', function() {
       .then((title) => title.should.equal('Mark Birbeck\'s Blog'))
     .then(() => driver.quit())
     .then(() => done())
+    .catch(error => done(error))
     ;
   });
 });
@@ -106,7 +107,6 @@ describe('my blog', function() {
       driver.getTitle()
       .should.eventually.equal('A Mixin Approach to Material Design Lite Using Sass')
     )
-    .then(() => done())
     ;
   });
 });
