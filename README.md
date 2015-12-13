@@ -91,7 +91,7 @@ Note that since this module takes responsibility for creating `driver` it also t
 The example we began with can now be expressed like this:
 
 ```javascript
-var chai = require('chai');
+let chai = require('chai');
 chai.use(require('chai-as-promised'));
 chai.should();
 
@@ -104,7 +104,7 @@ describe('my blog', () => {
       driver.getTitle()
       .should.eventually.equal('Mark Birbeck\'s Blog')
     )
-    .then(
+    .then(() =>
       driver.findElement(
         By.linkText('A Mixin Approach to Material Design Lite Using Sass')
       ).click()
