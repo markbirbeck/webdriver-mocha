@@ -5,7 +5,7 @@ var driver = new webdriver.Builder()
   .forBrowser('phantomjs')
   .build();
 
-['click', 'get', 'getTitle', 'quit'].forEach(name => {
+['click', 'get', 'getTitle', 'quit', 'wait'].forEach(name => {
   var savedFn = driver[name];
 
   /**
