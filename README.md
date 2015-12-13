@@ -17,8 +17,8 @@ var driver = new webdriver.Builder()
     .forBrowser('firefox')
     .build();
 
-describe('my blog', function() {
-  it('should navigate to post', function(done) {
+describe('my blog', () => {
+  it('should navigate to post', done => {
     driver.get('http://markbirbeck.com/')
     .then(() => driver.getTitle())
       .then((title) => title.should.equal('Mark Birbeck\'s Blog'))
@@ -30,49 +30,55 @@ describe('my blog', function() {
 });
 ```
 
-There are two improvements that we'd like to make:
+(For more examples see [Writing Tests](https://code.google.com/p/selenium/wiki/WebDriverJs#Writing_Tests) and [Promises](https://code.google.com/p/selenium/wiki/WebDriverJs#Promises) in the [WebDriverJS User’s Guide](https://code.google.com/p/selenium/wiki/WebDriverJs).)
 
-* avoid having to nest every WebDriver command in a simple function;
+There are four improvements that we'd like to make:
+
+* avoid having to nest every WebDriver command in a simple function (for example, ```() => driver.getTitle()```);
+* be able to use promise-related libraries like [Chai as Promised](http://chaijs.com/plugins/chai-as-promised);
+* be able to dispense with `done()` and `catch()` in Mocha by returning a promise;
 * be able to use `driver`, `By` and `until` without having to repeat the declarations at the top of every test file.
 
-### Nesting Commands and Returning Promises
+### Using Promises
 
-In order to use WebDriver commands like `getTitle()` we need to nest them in a simple function:
+The first three points *should* all be possible, but since the promises that WebDriver returns are not 'compatible' with those used in other libraries -- such as Mocha and Chai as Promised -- they all fail.
+
+For example, to use WebDriver commands like `getTitle()` we are obliged to nest them in a simple function:
 
 ```javascript
     .
     .
     .then(() => driver.getTitle())
-      .then((title) => title.should.equal('Mark Birbeck\'s Blog'))
+      .then(title => title.should.equal('Mark Birbeck\'s Blog'))
     .
     .
 ```
 
-Ideally we should be able to use them more directly, like this:
+However, what we *should* be able to do is simply pass a reference to the WebDriver function, like this:
 
 ```javascript
     .
     .
     .then(driver.getTitle)
-      .then((title) => title.should.equal('Mark Birbeck\'s Blog'))
+      .then(title => title.should.equal('Mark Birbeck\'s Blog'))
     .
     .
 ```
 
-This should work, since WebDriver claims to return promises for commands...but it doesn't. The reason is probably because the type of promises being used in WebDriver are not compatible with other libraries. However, if we wrap the call with a more 'standard' promise we can get this to work:
+Although WebDriver claims to return promises for commands the type of promises being used are not compatible with other libraries -- like Mocha -- and what should be a chain of promises turns out not to be (i.e., the promises are not being 'followed'). To get this to work we have to wrap calls to WebDriver functions with a more 'standard' promise:
 
 ```javascript
     .
     .
     .then(() => Promise.resolve(driver.getTitle()))
-      .then((title) => title.should.equal('Mark Birbeck\'s Blog'))
+      .then(title => title.should.equal('Mark Birbeck\'s Blog'))
     .
     .
 ```
 
 To make this wrapping easier, the `webdriver-mocha` module wraps all of the WebDriver commands with 'proper' promises and therefore allows the more direct syntax.
 
-Note that doing this wrapping also makes it possible to use `chai-as-promised`, which won't work with the promises that `WebDriver` is using.
+Note that doing this wrapping makes it possible to use Chai as Promised, which won't work with the promises that `WebDriver` is using. It also means that we can take advantage of a key benefit of Mocha which is that if a test returns a promise then Mocha will handle rejected promises. This means we can dispense with calling `done()` to terminate the test, and avoid the need to provide the `catch()` handler.
 
 ### Easy Inclusion in Mocha
 
@@ -82,7 +88,7 @@ Note that since this module takes responsibility for creating `driver` it also t
 
 ## An Example
 
-The example we began with can now be expressed like this (note the addition of `chai-as-promised` and the removal of `driver.quit()`):
+The example we began with can now be expressed like this:
 
 ```javascript
 var chai = require('chai');
@@ -91,9 +97,9 @@ chai.should();
 
 require('webdriver-mocha');
 
-describe('my blog', function() {
-  it('should navigate to post', function(done) {
-    driver.get('http://markbirbeck.com/')
+describe('my blog', () => {
+  it('should navigate to post', () => {
+    return driver.get('http://markbirbeck.com/')
     .then(
       driver.getTitle()
       .should.eventually.equal('Mark Birbeck\'s Blog')
@@ -112,10 +118,12 @@ describe('my blog', function() {
 });
 ```
 
+Note the addition of Chai as Promised, the removal of `driver.quit()`, and -- thanks to the `return` statement at the start of the test -- the omission of the two `done()` handlers.
+
 Loading the `webdriver-mocha` module has given us:
 
 * access to `driver`, `By` and `until` in exactly the same way as many snippets of code to be found on the web, making it easy to include them, and;
-* the use of 'proper' promises on the commands, improving the integration with other libraries that use promises, such as `chai-as-promised`, and of course `mocha` itself.
+* the use of 'proper' promises on the commands, improving the integration with other libraries that use promises, such as Chai as Promised, and of course Mocha itself.
 
 ## Using With Linting Tools
 
