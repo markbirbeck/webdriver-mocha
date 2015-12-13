@@ -25,6 +25,25 @@ describe('using promises', function() {
   describe('different ways to control tests', () => {
     describe('return a promise (recommended)', () => {
       it('using a function', function() {
+
+        /**
+         * Another test may have navigated away from the homepage, so put it
+         * back:
+         */
+
+        driver.get('http://markbirbeck.com/')
+        .then(() => {
+          return driver.wait(
+            () => {
+              return driver.getTitle()
+              .then(title => title === 'Mark Birbeck\'s Blog')
+              ;
+            },
+            10000
+          )
+        })
+        ;
+
         return driver.get('http://markbirbeck.com/')
         .then(driver.getTitle)
           .then(title => title.should.equal('Mark Birbeck\'s Blog'))

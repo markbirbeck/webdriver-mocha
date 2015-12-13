@@ -9,6 +9,23 @@ require('..' /*webdriver-mocha*/);
 describe('check my blog', function() {
   this.timeout(10000);
 
+  /**
+   * Another test may have navigated away from the homepage, so put it back:
+   */
+
+  driver.get('http://markbirbeck.com/')
+  .then(() => {
+    return driver.wait(
+      () => {
+        return driver.getTitle()
+        .then(title => title === 'Mark Birbeck\'s Blog')
+        ;
+      },
+      10000
+    )
+  })
+  ;
+
   describe('each test has its own promise', () => {
     it('should have the correct title', done =>
       driver.get('http://markbirbeck.com/')
