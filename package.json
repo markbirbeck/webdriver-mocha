@@ -1,6 +1,6 @@
 {
   "name": "webdriver-mocha",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Allow selenium-webdriver to be used within mocha without changing command-line.",
   "main": "index.js",
   "scripts": {
