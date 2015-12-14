@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "preversion": "npm test"
+    "preversion": "npm test",
+    "docker": "docker run -it -v \"${PWD}\":/usr/src/app webdriver-mocha",
+    "dockerbuild": "docker built -t webdriver-mocha ."
   },
   "keywords": [
     "mocha",
