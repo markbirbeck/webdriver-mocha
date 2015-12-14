@@ -20,7 +20,7 @@ chai.should();
 require('..' /*webdriver-mocha*/);
 
 describe('using promises', function() {
-  this.timeout(10000);
+  this.timeout(15000);
 
   describe('different ways to control tests', () => {
     describe('return a promise (recommended)', () => {

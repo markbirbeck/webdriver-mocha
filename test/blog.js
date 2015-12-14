@@ -7,7 +7,7 @@ chai.should();
 require('..' /*webdriver-mocha*/);
 
 describe('check my blog', function() {
-  this.timeout(10000);
+  this.timeout(15000);
 
   /**
    * Another test may have navigated away from the homepage, so put it back:
